@@ -77,25 +77,36 @@ int main (int argc, char* argv[]){
 	std::vector<float> res_hasard;
 	time_t ms;
 	int nb_exp = 10;
-	std::string mot_rech = "Ha";
+	std::string mot_rech = "hasard";
+	std::stringstream ss;
 	
-	if (argc>=2){
-		sscanf(argv[1],"%d",&nb_exp);
-	}
+	if (argc==1){
+		std::cout << "Usage: ./hasard <mot> <nbReplications>" << std::endl;
 		
-	ms = time(NULL);
-	Hasard has(nb_exp,
-	 "pi_states/", "state", "state",
-	  "hasard_res/", "hasard",
-	  mot_rech);
-	
-	res_hasard = has.mot_hasard();
-	
-	std::cout 
-		<< "Temps d'execution = " << (long)time(NULL) - (long)ms << std::endl 
-		<< "Replications sequentiel = " << nb_exp << std::endl
-		<< "Phrase a trouver : " << mot_rech << std::endl
-		<< "Nombre de tirage moyen pour le mot hasard : " << res_hasard[0] << std::endl
-		<< "Variance : "<< res_hasard[1] << std::endl;
+	}else{
+		if(argc==2){
+			ss << argv[1];
+			ss >> mot_rech;	
+		
+		}else if(argc==3){
+			ss << argv[1] << " " << argv[2];
+			ss >> mot_rech >> nb_exp;	
+		}
+		
+		ms = time(NULL);
+		Hasard has(nb_exp,
+		 "pi_states/", "state", "state",
+		  "hasard_res/", "hasard",
+		  mot_rech);
+
+		res_hasard = has.mot_hasard();
+
+		std::cout 
+			<< "Temps d'execution = " << (long)time(NULL) - (long)ms << std::endl 
+			<< "Replications sequentiel = " << nb_exp << std::endl
+			<< "Phrase a trouver : " << mot_rech << std::endl
+			<< "Nombre de tirage moyen pour le mot hasard : " << res_hasard[0] << std::endl
+			<< "Variance : "<< res_hasard[1] << std::endl;
+	}
  	return 0;
 }

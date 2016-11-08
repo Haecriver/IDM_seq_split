@@ -27,7 +27,7 @@ CC = g++
 
 ### FLAGS ###
 CFLAGS = -W -Wall -ansi -pedantic -g -O3
-LDFLAGS = -I../CLHEP/include -L../CLHEP/lib -lm -lCLHEP-Random-2.1.0.0
+LDFLAGS = -I../CLHEP/include -L../CLHEP/lib -lm -static -lCLHEP-Random-2.1.0.0
 
 ### Nom de l'executable ###
 _EXEC = stateGenerator pi hasard gattaca

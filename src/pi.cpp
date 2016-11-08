@@ -67,21 +67,33 @@ int main (int argc, char* argv[]){
 	time_t ms;
 	int nb_exp = 10;
 	unsigned long nb_tirages = 1000000000;
+	std::stringstream ss;
 	
-	if (argc>=2){
-		sscanf(argv[1],"%d",&nb_exp);
+	if (argc==1){
+		std::cout << "Usage: ./pi <numberOfTries> <nbReplications>" << std::endl;
+		
+	}else{
+		if(argc==2){
+			ss << argv[1];
+			ss >> nb_tirages;	
+		
+		}else if(argc==3){
+			ss << argv[1] << " " << argv[2];
+			ss >> nb_tirages >> nb_exp;	
+		}
+		
+		ms = time(NULL);
+		Pi pi(nb_exp, "pi_states/", "state", "state",
+		  "pi_res/", "pi", nb_tirages);
+	
+		res_monte_carlo = pi.monte_carlo();
+	
+		std::cout 
+			<< "Temps d'execution = " << (long)time(NULL) - (long)ms << std::endl 
+			<< "Replications sequentiel = " << nb_exp << ", Nombre de points = " <<  (int)nb_tirages << std::endl
+			<< "PI= " << M_PI << " PI_Monte Carlo= " << res_monte_carlo[0] << std::endl
+			<< "Ecart de MC_PI par rapport a M_PI " << fabs((res_monte_carlo[0]-M_PI)/M_PI)*100.0 << std::endl;
 	}
 		
-	ms = time(NULL);
-	Pi pi(nb_exp, "pi_states/", "state", "state",
-	  "pi_res/", "pi", nb_tirages);
-	
-	res_monte_carlo = pi.monte_carlo();
-	
-	std::cout 
-		<< "Temps d'execution = " << (long)time(NULL) - (long)ms << std::endl 
-		<< "Replications sequentiel = " << nb_exp << ", Nombre de points = " <<  (int)nb_tirages << std::endl
-		<< "PI= " << M_PI << " PI_Monte Carlo= " << res_monte_carlo[0] << std::endl
-		<< "Ecart de MC_PI par rapport a M_PI " << fabs((res_monte_carlo[0]-M_PI)/M_PI)*100.0 << std::endl;
  	return 0;
 }

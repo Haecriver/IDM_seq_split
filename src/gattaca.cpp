@@ -81,24 +81,35 @@ int main (int argc, char* argv[]){
 	std::vector<float> res_hasard;
 	time_t ms;
 	int nb_exp = 10, nb_nucl = 10;
-	
-	if (argc>=2){
-		sscanf(argv[1],"%d",&nb_exp);
-	}
+	std::stringstream ss;
 		
-	ms = time(NULL);
-	Gattaca gat(nb_exp,
-	 "pi_states/", "state", "state",
-	  "gattaca_res/", "gattaca",
-	  nb_nucl);
+	if (argc==1){
+		std::cout << "Usage: ./hasard <sizeGattaca> <nbReplications>" << std::endl;
+		
+	}else{
+		if(argc==2){
+			ss << argv[1];
+			ss >> nb_nucl;	
+		
+		}else if(argc==3){
+			ss << argv[1] << " " << argv[2];
+			ss >> nb_nucl >> nb_exp;	
+		}
+		
+		ms = time(NULL);
+		Gattaca gat(nb_exp,
+		 "pi_states/", "state", "state",
+		  "gattaca_res/", "gattaca",
+		  nb_nucl);
 	
-	res_hasard = gat.mot_hasard();
+		res_hasard = gat.mot_hasard();
 	
-	std::cout 
-		<< "Temps d'execution = " << (long)time(NULL) - (long)ms << std::endl 
-		<< "Replications sequentiel = " << nb_exp << std::endl
-		<< "Nombre d'element a trouver :" << nb_nucl << std::endl
-		<< "Nombre de tirage moyen pour le mot hasard : " << res_hasard[0] << std::endl
-		<< "Variance : "<< res_hasard[1] << std::endl;
+		std::cout 
+			<< "Temps d'execution = " << (long)time(NULL) - (long)ms << std::endl 
+			<< "Replications sequentiel = " << nb_exp << std::endl
+			<< "Nombre d'element a trouver :" << nb_nucl << std::endl
+			<< "Nombre de tirage moyen pour le mot hasard : " << res_hasard[0] << std::endl
+			<< "Variance : "<< res_hasard[1] << std::endl;
+	}
  	return 0;
 }
