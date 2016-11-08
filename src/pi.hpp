@@ -1,10 +1,10 @@
 #ifndef __pi_HPP__
 #define __pi_HPP__
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <time.h>
 
+#include <ctime>
+#include <cmath>
+
+#include <iostream>
 #include <sstream>
 #include <fstream>
 #include <vector>
@@ -15,16 +15,17 @@
 
 #include "seq_splitting.hpp"
 
-#define DEBUG_MC 0
-#define CHARGEMENT 0
-
-#define M_PI 3.14159265358979323846
+const bool DEBUG_MC = 0;
 
 class Pi : public SeqSplit{
+	private:
+		unsigned long		_nb_tirages;
+
 	public:
-		Pi(unsigned int pNb_exp, unsigned long pNb_tirage,
-						std::string pStatePath, std::string pStateName, std::string pStateExt, 
-						std::string pResPath, std::string pResName);
+		Pi(unsigned int pNb_exp, std::string pStatePath, 
+					std::string pStateName, std::string pStateExt, std::string pResPath, 
+					std::string pResName, unsigned long pnb_tirages,
+					 bool pmode_seq_split);
 				
 		~Pi();
 

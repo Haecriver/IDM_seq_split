@@ -1,10 +1,15 @@
 #include "pi.hpp"
 
-Pi::Pi(unsigned int pNb_exp, unsigned long pNb_tirage,
-				std::string pStatePath, std::string pStateName, std::string pStateExt, 
-				std::string pResPath, std::string pResName):
-	SeqSplit(pNb_exp, pNb_tirage, pStatePath, 
-		pStateName, pStateExt, pResPath, pResName)
+Pi::Pi(unsigned int pNb_exp, std::string pStatePath, 
+		std::string pStateName, std::string pStateExt, std::string pResPath, 
+		std::string pResName, 
+		unsigned long pNb_tirages=1000000000,
+		bool pmode_seq_split=true	
+	):
+	SeqSplit(pNb_exp, pStatePath, 
+		pStateName, pStateExt, pResPath, pResName,
+		pmode_seq_split),
+		_nb_tirages(pNb_tirages)
 {}
 
 Pi::~Pi(){}
@@ -51,7 +56,7 @@ std::vector<float> Pi::monte_carlo (){
 	/*Var = E[X²]-E[X]²*/
 
 	if (DEBUG_MC){
-		printf("RESULTAT MOYEN = %f\t VARIANCE = %f\n",res_monte_carlo[0],res_monte_carlo[1]);
+		std::cout << "RESULTAT MOYEN = "<< res_monte_carlo[0] << " \t VARIANCE = " << res_monte_carlo[1] << std::endl;
 	}
 	
 	return res_monte_carlo;
@@ -68,15 +73,15 @@ int main (int argc, char* argv[]){
 	}
 		
 	ms = time(NULL);
-	Pi pi(nb_exp, nb_tirages,
-	 "pi_states/", "state", "state",
-	  "pi_res/", "pi");
+	Pi pi(nb_exp, "pi_states/", "state", "state",
+	  "pi_res/", "pi", nb_tirages);
 	
 	res_monte_carlo = pi.monte_carlo();
 	
-	printf("Temps d'execution = %ld\n", (long)time(NULL) - (long)ms);
-	printf("Replications sequentiel = %d, Nombre de points = %d\n", nb_exp, (int)nb_tirages);
-	printf("PI=%0.15f, PI_Monte Carlo=%0.15f\n",M_PI,res_monte_carlo[0]);
-	printf("Ecart de MC_PI par rapport a M_PI %f\n",fabs((res_monte_carlo[0]-M_PI)/M_PI)*100.0);
+	std::cout 
+		<< "Temps d'execution = " << (long)time(NULL) - (long)ms << std::endl 
+		<< "Replications sequentiel = " << nb_exp << ", Nombre de points = " <<  (int)nb_tirages << std::endl
+		<< "PI= " << M_PI << " PI_Monte Carlo= " << res_monte_carlo[0] << std::endl
+		<< "Ecart de MC_PI par rapport a M_PI " << fabs((res_monte_carlo[0]-M_PI)/M_PI)*100.0 << std::endl;
  	return 0;
 }

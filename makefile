@@ -38,16 +38,16 @@ EXEC = $(patsubst %,$(EXEDIR)/%,$(_EXEC))
 all:$(EXEC)
 
 $(EXEDIR)/stateGenerator: $(SRCDIR)/states.cpp
-		@$(CC) -o $@ $(CFLAGS) $^ $(LDFLAGS)
+		$(CC) -o $@ $(CFLAGS) $^ $(LDFLAGS)
 
 $(EXEDIR)/pi: $(SRCDIR)/pi.cpp $(SRCDIR)/seq_splitting.cpp
-		@$(CC) -o $@ $(CFLAGS) $^ $(LDFLAGS)
+		$(CC) -o $@ $(CFLAGS) $^ $(LDFLAGS)
 		
 $(EXEDIR)/hasard: $(SRCDIR)/hasard.cpp $(SRCDIR)/seq_splitting.cpp
-		@$(CC) -o $@ $(CFLAGS) $^ $(LDFLAGS)
+		$(CC) -o $@ $(CFLAGS) $^ $(LDFLAGS)
 		
 $(EXEDIR)/gattaca: $(SRCDIR)/gattaca.cpp $(SRCDIR)/seq_splitting.cpp
-		@$(CC) -o $@ $(CFLAGS) $^ $(LDFLAGS)
+		$(CC) -o $@ $(CFLAGS) $^ $(LDFLAGS)
 	
 clean:
 	rm $(EXEC); rm $(OBJ)

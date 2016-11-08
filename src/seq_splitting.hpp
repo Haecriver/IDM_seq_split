@@ -8,16 +8,17 @@
 #include <fstream>
 #include <sstream>
 
+#include <stdlib.h> 
+
 #include <sys/wait.h>
 
 #include "../../CLHEP/Random/MTwistEngine.h"
 
 class SeqSplit{
 	protected:
-		CLHEP::MTwistEngine* 	_mt;
-		unsigned 							_nb_exp;
-		unsigned long 				_nb_tirages;
-		std::vector<int> 			_children;
+		CLHEP::MTwistEngine* 			_mt;
+		unsigned 						_nb_exp;
+		std::vector<int> 				_children;
 		
 		std::string 					_statePath;
 		std::string 					_stateName;
@@ -25,13 +26,15 @@ class SeqSplit{
 		
 		std::string 					_resPath;
 		std::string 					_resName;
+		
+		bool							_mode_seq_split;
 	
 		float get_genrand(CLHEP::MTwistEngine* mt);
 		
 	public:
-		SeqSplit(unsigned int pNb_exp, unsigned long pNb_tirage,
-						std::string pStatePath, std::string pStateName, std::string pStateExt, 
-						std::string pResPath, std::string pResName);
+		SeqSplit(unsigned int pNb_exp, std::string pStatePath, 
+					std::string pStateName, std::string pStateExt, std::string pResPath, 
+					std::string pResName, bool pmode_seq_split);
 							
 		virtual ~SeqSplit();
 	
