@@ -84,7 +84,7 @@ int main (int argc, char* argv[]){
 	std::stringstream ss;
 		
 	if (argc==1){
-		std::cout << "Usage: ./hasard <sizeGattaca> <nbReplications>" << std::endl;
+		std::cout << "Usage: ./gattaca <sizeGattaca> <nbReplications>" << std::endl;
 		
 	}else{
 		if(argc==2){
@@ -108,7 +108,7 @@ int main (int argc, char* argv[]){
 			<< "Temps d'execution = " << (long)time(NULL) - (long)ms << std::endl 
 			<< "Replications sequentiel = " << nb_exp << std::endl
 			<< "Nombre d'element a trouver :" << nb_nucl << std::endl
-			<< "Nombre de tirage moyen pour le mot hasard : " << res_hasard[0] << std::endl
+			<< "Nombre de tirage moyen pour la sequence : " << res_hasard[0] << std::endl
 			<< "Variance : "<< res_hasard[1] << std::endl;
 	}
  	return 0;
