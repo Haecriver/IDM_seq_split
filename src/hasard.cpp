@@ -77,7 +77,7 @@ int main (int argc, char* argv[]){
 	std::vector<float> res_hasard;
 	time_t ms;
 	int nb_exp = 10;
-	std::string mot_rech = "Has";
+	std::string mot_rech = "Ha";
 	
 	if (argc>=2){
 		sscanf(argv[1],"%d",&nb_exp);
@@ -94,7 +94,7 @@ int main (int argc, char* argv[]){
 	std::cout 
 		<< "Temps d'execution = " << (long)time(NULL) - (long)ms << std::endl 
 		<< "Replications sequentiel = " << nb_exp << std::endl
-		<< "Phrase a trouver :" << mot_rech << std::endl
+		<< "Phrase a trouver : " << mot_rech << std::endl
 		<< "Nombre de tirage moyen pour le mot hasard : " << res_hasard[0] << std::endl
 		<< "Variance : "<< res_hasard[1] << std::endl;
  	return 0;

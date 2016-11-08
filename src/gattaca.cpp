@@ -89,7 +89,7 @@ int main (int argc, char* argv[]){
 	ms = time(NULL);
 	Gattaca gat(nb_exp,
 	 "pi_states/", "state", "state",
-	  "hasard_res/", "hasard",
+	  "gattaca_res/", "gattaca",
 	  nb_nucl);
 	
 	res_hasard = gat.mot_hasard();
